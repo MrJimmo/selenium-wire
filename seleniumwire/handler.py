@@ -138,6 +138,7 @@ class InterceptRequestHandler:
             url=flow.request.url,
             headers=[(k, v) for k, v in flow.request.headers.items()],
             body=flow.request.raw_content,
+            http_version = flow.request.http_version,
         )
 
         # For websocket requests, the scheme of the request is overwritten with https
@@ -155,6 +156,7 @@ class InterceptRequestHandler:
             reason=flow.response.reason,
             headers=[(k, v) for k, v in flow.response.headers.items(multi=True)],
             body=flow.response.raw_content,
+            http_version = flow.response.http_version,
         )
 
         cert = flow.server_conn.cert

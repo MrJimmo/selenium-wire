@@ -19,7 +19,7 @@ class HTTPHeaders(HTTPMessage):
 class Request:
     """Represents an HTTP request."""
 
-    def __init__(self, *, method: str, url: str, headers: Iterable[Tuple[str, str]], body: bytes = b''):
+    def __init__(self, *, method: str, url: str, headers: Iterable[Tuple[str, str]], body: bytes = b'', http_version: str):
         """Initialise a new Request object.
 
         Args:
@@ -32,6 +32,7 @@ class Request:
         self.method = method
         self.url = url
         self.headers = HTTPHeaders()
+        self.http_version = http_version
 
         for k, v in headers:
             self.headers.add_header(k, v)
@@ -155,7 +156,7 @@ class Request:
 class Response:
     """Represents an HTTP response."""
 
-    def __init__(self, *, status_code: int, reason: str, headers: Iterable[Tuple[str, str]], body: bytes = b''):
+    def __init__(self, *, status_code: int, reason: str, headers: Iterable[Tuple[str, str]], body: bytes = b'', http_version: str):
         """Initialise a new Response object.
 
         Args:
@@ -167,6 +168,7 @@ class Response:
         self.status_code = status_code
         self.reason = reason
         self.headers = HTTPHeaders()
+        self.http_version = http_version
 
         for k, v in headers:
             self.headers.add_header(k, v)
